@@ -36,7 +36,7 @@ end
 if Weapon == "arccw_go_ace" or Weapon == "arccw_go_ak47" or Weapon == "arccw_go_ar15" or Weapon == "arccw_go_aug" or Weapon == "arccw_go_famas" or Weapon == "arccw_go_fnfal" or Weapon == "arccw_go_g3" or Weapon == "arccw_go_m4" or Weapon == "arccw_go_m249para" or Weapon == "arccw_go_negev" or Weapon == "arccw_go_sg556" or Weapon == "arccw_go_scar" then
 ArAmmo:SetPos( npc:GetPos() )
 ArAmmo:Spawn()
-SmgAmmo:SetCollisionGroup( 2 )
+ArAmmo:SetCollisionGroup( 2 )
 end
 
 if Weapon == "arccw_go_870" or Weapon == "arccw_go_m1014" or Weapon == "arccw_go_mag7" or Weapon == "arccw_go_nova" then
