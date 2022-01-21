@@ -6,14 +6,33 @@ CreateConVar( "DropAR2AltAmmo", "1", 128, "Enable players with weapons that use 
 
 hook.Add( "OnNPCKilled", "TheyDied", function( npc )
 
-local PistolAmmo = ents.Create( "item_ammo_pistol" ) // replace "item_ammo_pistol" with your own entity, if you want, same for all the others
-local RevolverAmmo = ents.Create( "item_ammo_357" )
-local SmgAmmo = ents.Create( "item_ammo_smg1" )
-local ArAmmo = ents.Create( "item_ammo_ar2" )
-local ShotgunAmmo = ents.Create( "item_box_buckshot" )
 local RocketAmmo = ents.Create( "item_rpg_round" )
-local BowAmmo = ents.Create( "item_ammo_crossbow" )
-local Grenadez = ents.Create( "item_ammo_smg1_grenade" )
+local PistolAmmo = {}
+local RevolverAmmo = {}
+local SmgAmmo = {}
+local ArAmmo = {}
+local ShotgunAmmo = {}
+local BowAmmo = {}
+local Grenadez = {}
+
+if ConVarExists("arccw_ammo_replace") and GetConVar("arccw_ammo_replace"):GetInt() == 1 then
+PistolAmmo = ents.Create( "arccw_ammo_pistol" )
+RevolverAmmo = ents.Create( "arccw_ammo_357" )
+SmgAmmo = ents.Create( "arccw_ammo_smg1" )
+ArAmmo = ents.Create( "arccw_ammo_ar2" )
+ShotgunAmmo = ents.Create( "arccw_ammo_buckshot" )
+BowAmmo = ents.Create( "arccw_ammo_sniper" )
+Grenadez = ents.Create( "arccw_ammo_smg1_grenade" )
+else
+PistolAmmo = ents.Create( "item_ammo_pistol" )
+RevolverAmmo = ents.Create( "item_ammo_357" )
+local SmgAmmo = ents.Create( "item_ammo_smg1" )
+ArAmmo = ents.Create( "item_ammo_ar2" )
+ShotgunAmmo = ents.Create( "item_box_buckshot" )
+BowAmmo = ents.Create( "item_ammo_crossbow" )
+Grenadez = ents.Create( "item_ammo_smg1_grenade" )
+end
+
 local AmmoChance = math.Rand( 1, 100 ) // Create this stuff
 
 if GetConVar( "NPCDropAmmo" ):GetInt() == 0 then return end // Do we allow drops?
@@ -25,7 +44,7 @@ if AmmoChance > GetConVar( "ChanceOfAmmo" ):GetInt() then return end // Do we ge
 if npc:GetActiveWeapon():GetSecondaryAmmoType() == 9 and GetConVar( "DropGrenadeAmmo" ):GetInt() == 1 then
 Grenadez:SetPos( npc:GetPos() )
 Grenadez:Spawn()
-Grenadez:SetCollisionGroup( 2 )
+Grenadez:SetCollisionGroup( 1 )
 end
 
 if npc:GetActiveWeapon():GetPrimaryAmmoType() == 3 then // Being the massive dumbass I am, I didn't do this until now Rather than using the weapon as the basis, we look for the ammo type
@@ -72,15 +91,34 @@ end)
 
 function DoPlayerDeath( ply ) // Now we do it for players
 
-local PistolAmmo = ents.Create( "item_ammo_pistol" )
-local RevolverAmmo = ents.Create( "item_ammo_357" )
-local SmgAmmo = ents.Create( "item_ammo_smg1" )
-local ArAmmo = ents.Create( "item_ammo_ar2" )
-local ShotgunAmmo = ents.Create( "item_box_buckshot" )
 local RocketAmmo = ents.Create( "item_rpg_round" )
-local BowAmmo = ents.Create( "item_ammo_crossbow" )
-local Grenadez = ents.Create( "item_ammo_smg1_grenade" )
 local ArBallz = ents.Create( "item_ammo_ar2_altfire" )
+local PistolAmmo = {}
+local RevolverAmmo = {}
+local SmgAmmo = {}
+local ArAmmo = {}
+local ShotgunAmmo = {}
+local BowAmmo = {}
+local Grenadez = {}
+
+if ConVarExists("arccw_ammo_replace") and GetConVar("arccw_ammo_replace"):GetInt() == 1 then
+PistolAmmo = ents.Create( "arccw_ammo_pistol" )
+RevolverAmmo = ents.Create( "arccw_ammo_357" )
+SmgAmmo = ents.Create( "arccw_ammo_smg1" )
+ArAmmo = ents.Create( "arccw_ammo_ar2" )
+ShotgunAmmo = ents.Create( "arccw_ammo_buckshot" )
+BowAmmo = ents.Create( "arccw_ammo_sniper" )
+Grenadez = ents.Create( "arccw_ammo_smg1_grenade" )
+else
+PistolAmmo = ents.Create( "item_ammo_pistol" )
+RevolverAmmo = ents.Create( "item_ammo_357" )
+local SmgAmmo = ents.Create( "item_ammo_smg1" )
+ArAmmo = ents.Create( "item_ammo_ar2" )
+ShotgunAmmo = ents.Create( "item_box_buckshot" )
+BowAmmo = ents.Create( "item_ammo_crossbow" )
+Grenadez = ents.Create( "item_ammo_smg1_grenade" )
+end
+
 local AmmoChance = math.Rand( 1, 100 )
 
 if GetConVar( "PlayerDropAmmo" ):GetInt() == 0 then return end
@@ -92,7 +130,7 @@ if AmmoChance > GetConVar( "ChanceOfAmmo" ):GetInt() then return end
 if ply:GetActiveWeapon():GetSecondaryAmmoType() == 9 and GetConVar( "DropGrenadeAmmo" ):GetInt() == 1 then
 Grenadez:SetPos( npc:GetPos() )
 Grenadez:Spawn()
-Grenadez:SetCollisionGroup( 2 )
+Grenadez:SetCollisionGroup( 1 )
 end
 
 if ply:GetActiveWeapon():GetPrimaryAmmoType() == 2 and GetConVar( "DropAR2AltAmmo" ):GetInt() == 1 then
