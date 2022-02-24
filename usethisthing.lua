@@ -26,7 +26,7 @@ Grenadez = ents.Create( "arccw_ammo_smg1_grenade" )
 else
 PistolAmmo = ents.Create( "item_ammo_pistol" )
 RevolverAmmo = ents.Create( "item_ammo_357" )
-local SmgAmmo = ents.Create( "item_ammo_smg1" )
+SmgAmmo = ents.Create( "item_ammo_smg1" )
 ArAmmo = ents.Create( "item_ammo_ar2" )
 ShotgunAmmo = ents.Create( "item_box_buckshot" )
 BowAmmo = ents.Create( "item_ammo_crossbow" )
@@ -68,6 +68,7 @@ end
 if npc:GetActiveWeapon():GetPrimaryAmmoType() == 1 then
 ArAmmo:SetPos( npc:GetPos() )
 ArAmmo:Spawn()
+ArAmmo:SetCollisionGroup( 1 )
 end
 
 if npc:GetActiveWeapon():GetPrimaryAmmoType() == 7 then
@@ -112,7 +113,7 @@ Grenadez = ents.Create( "arccw_ammo_smg1_grenade" )
 else
 PistolAmmo = ents.Create( "item_ammo_pistol" )
 RevolverAmmo = ents.Create( "item_ammo_357" )
-local SmgAmmo = ents.Create( "item_ammo_smg1" )
+SmgAmmo = ents.Create( "item_ammo_smg1" )
 ArAmmo = ents.Create( "item_ammo_ar2" )
 ShotgunAmmo = ents.Create( "item_box_buckshot" )
 BowAmmo = ents.Create( "item_ammo_crossbow" )
@@ -160,6 +161,7 @@ end
 if ply:GetActiveWeapon():GetPrimaryAmmoType() == 1 then
 ArAmmo:SetPos( ply:GetPos() )
 ArAmmo:Spawn()
+ArAmmo:SetCollisionGroup( 1 )
 end
 
 if ply:GetActiveWeapon():GetPrimaryAmmoType() == 7 then
