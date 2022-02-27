@@ -44,11 +44,11 @@ if AmmoChance > GetConVar( "ChanceOfAmmo" ):GetInt() then return end // Do we ge
 if npc:GetActiveWeapon():GetSecondaryAmmoType() == 9 and GetConVar( "DropGrenadeAmmo" ):GetInt() == 1 then
 Grenadez:SetPos( npc:GetPos() )
 Grenadez:Spawn()
-Grenadez:SetCollisionGroup( 1 )
+Grenadez:SetCollisionGroup( 1 ) // If you are using VManip's Manual Pickup addon, change this value to 2. This will allow you to actually pick up the ammo.
 end
 
 if npc:GetActiveWeapon():GetPrimaryAmmoType() == 3 then // Being the massive dumbass I am, I didn't do this until now Rather than using the weapon as the basis, we look for the ammo type
-PistolAmmo:SetPos( npc:GetPos() )  // This makes it spawn at their feet // Fucking kill me This makes it mcuh better and universal, rather than restricting it to weapon types
+PistolAmmo:SetPos( npc:GetPos() )  // This makes it spawn at their feet // Fucking kill me This makes it much better and universal, rather than restricting it to weapon types
 PistolAmmo:Spawn() 
 PistolAmmo:SetCollisionGroup( 1 ) // Disable collision with the NPC so the ammo doesn't go flying
 end
