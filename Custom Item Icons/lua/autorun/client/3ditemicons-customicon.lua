@@ -1,6 +1,6 @@
 hook.Add( "HUDPaint", "CustomIcon", function() // Feel free to replace CustomIcon with your own identifier
 // Do not use these identifiers;
-// ArmorIcon, ArcCWArmorIcon, GrenadeWarning, HealthIcon, ArcCWHealthIcon and WeaponIcon 
+// ArmorIcon, ArcCWArmorIcon, GrenadeWarning, HealthIcon, ArcCWHealthIcon, WeaponIcon and RocketIcon 
 
 local itemdistance = GetConVar("ItemIconDistance"):GetInt() // Player-Chosen distance
 
