@@ -24,8 +24,6 @@ local customicon = Material("customicon.png") // Icon and stuff
 local customoutline = Material("customoutline.png")
 // You can (and should) modify these
 
-cam.Start3D()
-
 for k, v in pairs (ents.FindByClass("customentity")) do // This is where we look for the entity
 // Use * for wildcards, eg. "item_*"
 
@@ -43,14 +41,10 @@ local customtracefinished = util.TraceLine(customtrace)
 // if GetConVar("CustomIcon"):GetBool() then // Presumably you do not want to have your icon dictated by a console command
 // But if you do, place this at the top of the file
 // CreateConVar("CustomIcon", "1", 128, "Enable custom icon.")
-// Place this at the bottom of the file
+// And place an extra end at line 58
 
-// end
-// end
-// end
-// cam.End3D()
-// end)
-
+cam.Start3D()
+								
 if OutlineEnabled and distance < itemdistance and (XRayVision or !tracedammo.HitWorld) then // This is the outline
 	render.SetMaterial( customoutline ) // It's literally just another image, behind the actual icon
 	render.DrawSprite( custompos, outlineicon, outlineicon, color_black ) // color_black makes the icon black
@@ -59,6 +53,7 @@ if distance < itemdistance and (XRayVision or !tracedammo.HitWorld) then // Chec
 	render.SetMaterial( customicon ) // If we cannot see through walls, then the icon will not render through walls
 	render.DrawSprite( custompos, sizeoficon, sizeoficon, ammocolor ) // Create the sprite itself, with our custom color
 end
-end
 cam.End3D()
+end
+// end											
 end)
