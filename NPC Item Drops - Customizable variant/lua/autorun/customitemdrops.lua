@@ -33,25 +33,25 @@ if ItemChance > GetConVar( "ChanceOfItems" ):GetInt() then return end
 
 // ItemChance is a random number between 1 and 100
 // ChanceOfItems is the number determined by the console command
-// For Ex. ItemChance = 82 > ChanceOfItems = 65 therefore no item drops
+// For Ex. If ItemChance = 82 and ChanceOfItems = 65 then no item drops
 // Delete this if the console command is also deleted
 
-local RandomItem = ents.Create(ItemTable[math.random(#ItemTable)])
-// local AnotherRandomItem = ents.Create(ItemTable[math.random(#ItemTable)])
+local RandomItem = ents.Create(table.Random(ItemTable))
+// local AnotherRandomItem = ents.Create(table.Random(ItemTable))
 
 // This simplifies item creation. It also applies the randomness when choosing an item
 // You can create multiple of these, for specific NPC's if you so choose
 
 // Here comes the part where we determine if it should drop, and specify the NPC aswell
 
-if (npc:GetClass() == "Medic" or npc:GetClass() == "npc_combine_s" or npc:GetClass() == "npc_metropolice") and not npc:HasSpawnFlags(8) then
-RandomItem:SetPos( npc:GetPos() ) // Set the position to be on the NPC
+if (npc:GetClass() == "npc_citizen" or npc:GetClass() == "npc_combine_s" or npc:GetClass() == "npc_metropolice") and not npc:HasSpawnFlags(8) then
+RandomItem:SetPos( npc:WorldSpaceCenter() ) // Set the position to be the NPC's center mass
 RandomItem:SetCollisionGroup( 2 ) // Modify the collision group so it no longer collides with the NPC
 RandomItem:Spawn() // Create the entity itself
 end
 
 // The item is now created. To break down what is happening in the first line;
-// npc:GetClass() determines the NPC. In this case, Medic is the rebel medic, npc_combine_s is the generic Combine Soldier (and all variants)
+// npc:GetClass() determines the NPC. In this case, npc_citizen is the ordinary citizen/rebel, npc_combine_s is the generic Combine Soldier (and all variants)
 // npc_metropolice is the metrocop (obviously)
 
 // not npc:SpawnFlags(8) checks if the NPC has this specific setting enabled. Metropolice may have this option enabled, meaning they drop a health vial upon death
@@ -67,7 +67,7 @@ end
 // npc:SetKeyValue( "spawnflags", bit.bor(npc:GetSpawnFlags() - 8) )
 // end
 //
-// if (npc:GetClass() == "Medic" or npc:GetClass() == "npc_combine_s" or npc:GetClass() == "npc_metropolice") and not npc:HasSpawnFlags(8) then
+// if (npc:GetClass() == "npc_citizen" or npc:GetClass() == "npc_combine_s" or npc:GetClass() == "npc_metropolice") and not npc:HasSpawnFlags(8) then
 // RandomItem:SetPos( npc:GetPos() ) // Set the position to be on the NPC
 // RandomItem:SetCollisionGroup( 2 ) // Modify the collision group so it no longer collides with the NPC
 // RandomItem:Spawn() // Create the entity itself
