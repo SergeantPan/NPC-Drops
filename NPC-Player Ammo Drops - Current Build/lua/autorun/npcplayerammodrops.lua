@@ -184,7 +184,7 @@ elseif GetConVar("SMGGrenadeDrop"):GetInt() == 2 then
 SMGGrenade = ents.Create("item_ammo_ar2_altfire")
 elseif GetConVar("SMGGrenadeDrop"):GetInt() == 3 then
 SMGGrenade = ents.Create("weapon_frag")
-elseif GetConVar("SMGGrenadeDrop"):GetInt() == 4 and IsValid(GetConVar("CustomSMGGrenadeDrop"):GetString()) then
+elseif GetConVar("SMGGrenadeDrop"):GetInt() == 4 then
 SMGGrenade = ents.Create(GetConVar("CustomSMGGrenadeDrop"):GetString())
 end
 
@@ -196,7 +196,7 @@ elseif GetConVar("ArAltDrop"):GetInt() == 2 then
 Ar2Alt = ents.Create("item_ammo_ar2_altfire")
 elseif GetConVar("ArAltDrop"):GetInt() == 3 then
 Ar2Alt = ents.Create("weapon_frag")
-elseif GetConVar("ArAltDrop"):GetInt() == 4 and IsValid(GetConVar("CustomArAltDrop"):GetString()) then
+elseif GetConVar("ArAltDrop"):GetInt() == 4 then
 Ar2Alt = ents.Create(GetConVar("CustomArAltDrop"):GetString())
 end
 
@@ -206,7 +206,7 @@ if GetConVar("SMGGrenadeDrop"):GetInt() == 4 and attacker:IsPlayer() and GetConV
 attacker:ChatPrint("You have chosen custom entity as your drop item, but have not actually selected an entity") // But the text field is blank or nil
 attacker:ChatPrint("Use the 'Custom Entity' textbox to choose a valid entity.")
 SMGGrenade = {} // Blank the entity, because otherwise spawning it will create errors
-elseif GetConVar("SMGGrenadeDrop"):GetInt() == 4 and attacker:IsPlayer() and !IsValid(GetConVar("CustomSMGGrenadeDrop"):GetString()) then // Same as above, but the entity in the field does not exist
+elseif GetConVar("SMGGrenadeDrop"):GetInt() == 4 and attacker:IsPlayer() and !IsValid(SMGGrenade) then // Same as above, but the entity in the field does not exist
 attacker:ChatPrint("The entity " ..  GetConVar("CustomSMGGrenadeDrop"):GetString() .. " is not a valid entity.")
 attacker:ChatPrint("Either the entity does not exist, or you've made a typo.")
 SMGGrenade = {}
@@ -218,7 +218,7 @@ if GetConVar("ArAltDrop"):GetInt() == 4 and attacker:IsPlayer() and GetConVar("C
 attacker:ChatPrint("You have chosen custom entity as your drop item, but have not actually selected an entity")
 attacker:ChatPrint("Use the 'Custom Entity' textbox to choose a valid entity.")
 Ar2Alt = {}
-elseif GetConVar("ArAltDrop"):GetInt() == 4 and attacker:IsPlayer() and !IsValid(GetConVar("CustomArAltDrop"):GetString()) then
+elseif GetConVar("ArAltDrop"):GetInt() == 4 and attacker:IsPlayer() and !IsValid(Ar2Alt) then
 attacker:ChatPrint("The entity " ..  GetConVar("CustomArAltDrop"):GetString() .. " is not a valid entity.")
 attacker:ChatPrint("Either the entity does not exist, or you've made a typo.")
 Ar2Alt = {}
@@ -353,7 +353,7 @@ elseif GetConVar("SMGGrenadeDrop"):GetInt() == 2 then
 SMGGrenade = ents.Create("item_ammo_ar2_altfire")
 elseif GetConVar("SMGGrenadeDrop"):GetInt() == 3 then
 SMGGrenade = ents.Create("weapon_frag")
-elseif GetConVar("SMGGrenadeDrop"):GetInt() == 4 and IsValid(GetConVar("CustomSMGGrenadeDrop"):GetString()) then
+elseif GetConVar("SMGGrenadeDrop"):GetInt() == 4 then
 SMGGrenade = ents.Create(GetConVar("CustomSMGGrenadeDrop"):GetString())
 end
 
@@ -363,7 +363,7 @@ elseif GetConVar("ArAltDrop"):GetInt() == 2 then
 Ar2Alt = ents.Create("item_ammo_ar2_altfire")
 elseif GetConVar("ArAltDrop"):GetInt() == 3 then
 Ar2Alt = ents.Create("weapon_frag")
-elseif GetConVar("ArAltDrop"):GetInt() == 4 and IsValid(GetConVar("CustomArAltDrop"):GetString()) then
+elseif GetConVar("ArAltDrop"):GetInt() == 4 then
 Ar2Alt = ents.Create(GetConVar("CustomArAltDrop"):GetString())
 end
 
@@ -371,7 +371,7 @@ if GetConVar("SMGGrenadeDrop"):GetInt() == 3 and attacker:IsPlayer() and GetConV
 attacker:ChatPrint("You have chosen custom entity as your drop item, but have not actually selected an entity")
 attacker:ChatPrint("Use the 'Custom Entity' textbox to choose a valid entity.")
 SMGGrenade = {}
-elseif GetConVar("SMGGrenadeDrop"):GetInt() == 3 and attacker:IsPlayer() and !IsValid(GetConVar("CustomSMGGrenadeDrop"):GetString()) then
+elseif GetConVar("SMGGrenadeDrop"):GetInt() == 3 and attacker:IsPlayer() and !IsValid(SMGGrenade) then
 attacker:ChatPrint("The entity " ..  GetConVar("CustomSMGGrenadeDrop"):GetString() .. " is not a valid entity.")
 attacker:ChatPrint("Either the entity does not exist, or you've made a typo.")
 SMGGrenade = {}
@@ -381,7 +381,7 @@ if GetConVar("ArAltDrop"):GetInt() == 4 and attacker:IsPlayer() and GetConVar("C
 attacker:ChatPrint("You have chosen custom entity as your drop item, but have not actually selected an entity")
 attacker:ChatPrint("Use the 'Custom Entity' textbox to choose a valid entity.")
 Ar2Alt = {}
-elseif GetConVar("ArAltDrop"):GetInt() == 4 and attacker:IsPlayer() and !IsValid(GetConVar("CustomArAltDrop"):GetString()) then
+elseif GetConVar("ArAltDrop"):GetInt() == 4 and attacker:IsPlayer() and !IsValid(Ar2Alt) then
 attacker:ChatPrint("The entity " ..  GetConVar("CustomArAltDrop"):GetString() .. " is not a valid entity.")
 attacker:ChatPrint("Either the entity does not exist, or you've made a typo.")
 Ar2Alt = {}
