@@ -50,14 +50,13 @@ CreateConVar( "DisableRPGDrops", "0", 128, "Disable RPG ammo drops entirely. 0 =
 
 // Basic function to prevent Combine Soldiers from dropping AR2 Energy Ball ammo on death
 
-function AR2BallRemover()
+hook.Add( "Think", "AddTheSpawnflag", function()
 for k, combine in pairs( ents.FindByClass( "npc_combine_s" ) ) do
 if !combine:HasSpawnFlags(262144) then
 	combine:SetKeyValue( "spawnflags", bit.bor(combine:GetSpawnFlags() + 262144) )
 end
 end
-end
-hook.Add( "Think", "AddTheSpawnflag", AR2BallRemover )
+end)
 
 hook.Add( "OnNPCKilled", "TheyDied", function( npc, attacker )
 // This function triggers every time an NPC dies
@@ -229,6 +228,7 @@ local AmmoChance = math.Rand( 1, 100 ) // Create this stuff
 if AmmoChance > GetConVar("ChanceOfAmmo"):GetInt() then return end // Do we get lucky and get ammo?
 
 if GetConVar("NPCDropAltAmmo"):GetBool() then // Can NPC's drop alt-fire ammo (Underbarrel grenades, AR2 energy balls)
+
 if npc:GetActiveWeapon():GetSecondaryAmmoType() == 9 and !GetConVar("DisableSMGGrenadeDrops"):GetBool() and IsValid(SMGGrenade) then // If yes, then: if secondary ammo is SMG grenades, drops are allowed and the entity is valid then
 SMGGrenade:SetPos( npc:WorldSpaceCenter() ) // Set position as the NPC's center mass
 SMGGrenade:Spawn() // Spawn the entity
@@ -236,12 +236,13 @@ SMGGrenade:SetCollisionGroup(2) // Alter collision to prevent dodgy physics
 end
 
 if npc:GetActiveWeapon():GetSecondaryAmmoType() == 2 and !GetConVar("DisableArAltDrops"):GetBool() and IsValid(Ar2Alt) then // Same as above, but for the AR2 Energy Balls
-if (GetConVar("RestoreArAltDropBehavior"):GetInt() == 1 and npc:GetClass() == "npc_combine_s") or GetConVar("RestoreArAltDropBehavior"):GetInt() == 0 then // Rince and repeat
+if GetConVar("RestoreArAltDropBehavior"):GetInt() == 0 or (GetConVar("RestoreArAltDropBehavior"):GetInt() == 1 and npc:GetClass() == "npc_combine_s") or (GetConVar("RestoreArAltDropBehavior"):GetInt() == 2 and npc:GetClass() == "npc_combine_s" and npc:GetModel() == "models/combine_super_soldier.mdl") then // Rince and repeat
 Ar2Alt:SetPos( npc:WorldSpaceCenter() )
 Ar2Alt:Spawn()
 Ar2Alt:SetCollisionGroup(2)
 end
 end
+
 end
 
 if GetConVar( "NPCDropAmmo" ):GetBool() then // Same as above, but for primary ammo instead

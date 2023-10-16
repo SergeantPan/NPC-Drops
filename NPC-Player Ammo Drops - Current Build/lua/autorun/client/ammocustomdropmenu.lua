@@ -93,8 +93,6 @@ end
 	Command = "CustomArAmmoDrop", })
 
 	panel:CheckBox( "Disable AR2 Orb Drops", "DisableArAltDrops" )
-	panel:CheckBox( "Only Combine can drop AR2 Orbs", "RestoreArAltDropBehavior" )
-	panel:Help( "If enabled, only Combine Soldiers (and variants) can drop AR2 Orbs. If disabled, any NPC using the AR2 can drop AR2 orbs.")
 
 	local ArAltAmmoBox = panel:ComboBox("AR2 Orb Drops", "ArAltDrop")
 	ArAltAmmoBox:SetSortItems(false)
