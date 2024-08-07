@@ -3,7 +3,8 @@ CreateConVar( "NPCDropAmmo", "1", 128, "Enable NPCs dropping ammo 1 = Enabled, 0
 CreateConVar( "NPCDropAltAmmo", "1", 128, "Enable NPCs with weapons that have secondary ammo (SMG1 Grenades/AR2 orbs) to drop secondary ammo 1 = Enabled, 0 = Disabled" )
 CreateConVar( "PlayerDropAmmo", "1", 128, "Enable Players dropping ammo 1 = Enabled, 0 = Disabled" )
 CreateConVar( "PlayerDropAltAmmo", "1", 128, "Enable players with weapons that have secondary ammo (SMG1 Grenades/AR2 orbs) to drop secondary ammo 1 = Enabled, 0 = Disabled" )
-CreateConVar( "DisableNPCWeaponDrop", "0", 128, "Prevent NPC's from dropping weapons 1 = Enabled, 0 = Disabled" )
+CreateConVar( "DisableNPCWeaponDrop", "0", 128, "Prevent NPC's from dropping weapons 2 = Chance-based Drop 1 = Enabled, 0 = Disabled" )
+CreateConVar( "NPCWeaponDropChance", "100", 128, "Chance for an NPC to drop their weapon. Requires DisableNPCWeaponDrop to be set to 2" )
 
 if ConVarExists("arccw_ammo_replace") then
 CreateConVar( "UseArcCWAmmo", "0", 128, "Use ArcCW Ammo entities in place of default HL2 ones." )
@@ -67,12 +68,6 @@ local Prefix = {}
 local PrefixShotgun = {}
 local CBowSuffix = {}
 
-// Basic function to disable NPC weapon drops
-
-if GetConVar( "DisableNPCWeaponDrop" ):GetInt() == 1 and !npc:HasSpawnFlags(8192) then
-npc:SetKeyValue( "spawnflags", bit.bor(npc:GetSpawnFlags() + 8192) )
-end
-
 // ArcCW ammo compatibility
 
 if ConVarExists("arccw_ammo_replace") and (GetConVar("arccw_ammo_replace"):GetBool() or GetConVar("UseArcCWAmmo"):GetBool()) then
@@ -88,6 +83,12 @@ end
 if npc:IsNextBot() then return end // NextBots have dodgy GetActiveWeapon behaviour, so we ignore them completely.
 
 if npc:GetActiveWeapon():IsWeapon() == false then return end // Does the NPC even have a weapon? DO NOT DELETE! Otherwise antlions and such will cause errors.
+
+// Basic function to disable NPC weapon drops
+
+if ((GetConVar( "DisableNPCWeaponDrop" ):GetInt() == 2 and math.Rand(1, 100) > GetConVar( "NPCWeaponDropChance" ):GetInt()) or GetConVar( "DisableNPCWeaponDrop" ):GetInt() == 1) and !npc:HasSpawnFlags(8192) then
+npc:SetKeyValue( "spawnflags", bit.bor(npc:GetSpawnFlags() + 8192) )
+end
 
 // Blank variable for getting the weapon type
 
