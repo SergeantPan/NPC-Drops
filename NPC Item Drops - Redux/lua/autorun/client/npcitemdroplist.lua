@@ -120,8 +120,21 @@ hook.Add( "PopulateToolMenu", "NPCItemDropListMenu", function()
 
 		if SelectedNPC == nil then return end
 
-		local File = "npcitemdrops/" .. SelectedNPC .. ".txt"
-		if !table.HasValue(Table, Text2:GetText()) then
+		File = "npcitemdrops/" .. SelectedNPC .. ".txt"
+
+		if file.Exists(File, "DATA") then
+			Table = util.JSONToTable(file.Read( File, "DATA" ))
+		else
+			Table = {}
+		end
+
+		if Text2:GetText() != "" and (!list.HasEntry("SpawnableEntities", Text2:GetText()) and !list.HasEntry("Weapon", Text2:GetText())) then
+			Button2:SetText("Invalid Entity")
+			surface.PlaySound("beep_error01.wav")
+			timer.Simple(1.5, function() Button2:SetText("Add item to drop list") end)
+		end
+
+		if !table.HasValue(Table, Text2:GetText()) and (list.HasEntry("SpawnableEntities", Text2:GetText()) or list.HasEntry("Weapon", Text2:GetText())) then
 			table.insert( Table, Text2:GetText() )
 			ItemsList:AddLine(Text2:GetText())
 			file.Write(File, util.TableToJSON(Table))
