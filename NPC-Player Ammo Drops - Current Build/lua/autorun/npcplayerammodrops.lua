@@ -26,7 +26,7 @@ CreateConVar( "SMGGrenadeDrop", "1", 128, "NPC's/Players with weapons that have 
 CreateConVar( "CustomSMGGrenadeDrop", "", 128, "Custom SMG Grenade ammo drop." )
 CreateConVar( "DisableSMGGrenadeDrops", "0", 128, "Disable SMG Grenade drops entirely. 0 = No, 1 = Yes" )
 
-CreateConVar( "ArAmmoDrop", "2", 128, "NPC's/Players with weapons that use AR2 ammo will drop this type of ammo" )
+CreateConVar( "ArAmmoDrop", "4", 128, "NPC's/Players with weapons that use AR2 ammo will drop this type of ammo" )
 CreateConVar( "CustomArAmmoDrop", "", 128, "Custom AR ammo drop." )
 CreateConVar( "DisableArDrops", "0", 128, "Disable AR2 ammo drops entirely. 0 = No, 1 = Yes" )
 
