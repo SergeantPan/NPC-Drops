@@ -1,9 +1,10 @@
 CreateConVar( "ChanceOfAmmo", "100", 128, "Chance of ammo drop 100 = 100%, 10 = 10% etc." )
-CreateConVar( "NPCDropAmmo", "1", 128, "Enable NPCs dropping ammo 1 = Enabled, 0 = Disabled" )
-CreateConVar( "NPCDropAltAmmo", "1", 128, "Enable NPCs with weapons that have secondary ammo (SMG1 Grenades/AR2 orbs) to drop secondary ammo 1 = Enabled, 0 = Disabled" )
-CreateConVar( "PlayerDropAmmo", "1", 128, "Enable Players dropping ammo 1 = Enabled, 0 = Disabled" )
-CreateConVar( "PlayerDropAltAmmo", "1", 128, "Enable players with weapons that have secondary ammo (SMG1 Grenades/AR2 orbs) to drop secondary ammo 1 = Enabled, 0 = Disabled" )
-CreateConVar( "DisableNPCWeaponDrop", "0", 128, "Prevent NPC's from dropping weapons 2 = Chance-based Drop 1 = Enabled, 0 = Disabled" )
+CreateConVar( "NPCDropAmmo", "1", 128, "Enable NPCs dropping ammo 0 = Disabled, 1 = Enabled" )
+CreateConVar( "NPCDropAltAmmo", "1", 128, "Enable NPCs with weapons that have secondary ammo (SMG1 Grenades/AR2 orbs) to drop secondary ammo 0 = Disabled, 1 = Enabled" )
+CreateConVar( "PlayerDropAmmo", "1", 128, "Enable Players dropping ammo 0 = Disabled, 1 = Enabled" )
+CreateConVar( "PlayerDropAltAmmo", "1", 128, "Enable players with weapons that have secondary ammo (SMG1 Grenades/AR2 orbs) to drop secondary ammo 0 = Disabled, 1 = Enabled" )
+CreateConVar( "DisableNPCWeaponDrop", "0", 128, "Prevent NPCs from dropping weapons 0 = Disabled, 1 = Enabled, 2 = Chance-based Drop" )
+CreateConVar( "DisableNPCGrenadeDrop", "0", 128, "Prevent Combine Soldiers from dropping grenades on death 0 = Disabled, 1 = Enabled" )
 CreateConVar( "NPCWeaponDropChance", "100", 128, "Chance for an NPC to drop their weapon. Requires DisableNPCWeaponDrop to be set to 2" )
 
 if ConVarExists("arccw_ammo_replace") then
@@ -61,6 +62,12 @@ end)
 
 hook.Add( "OnNPCKilled", "TheyDied", function( npc, attacker )
 // This function triggers every time an NPC dies
+
+if GetConVar("DisableNPCGrenadeDrop"):GetBool() and npc:GetClass() == "npc_combine_s" then
+if !npc:HasSpawnFlags(131072) then
+	npc:SetKeyValue( "spawnflags", bit.bor(npc:GetSpawnFlags() + 131072) )
+end
+end
 
 // Variables necessary for spawning the right type of ammo
 

@@ -11,6 +11,8 @@ hook.Add( "PopulateToolMenu", "NpcAmmoDropSettings", function()
 	panel:Help( "Allow NPC ammo drops" )
 	panel:CheckBox( "NPC Secondary Ammo Drops", "NPCDropAltAmmo" )
 	panel:Help( "Allow NPCs to drop Secondary Ammo" )
+	panel:CheckBox( "Disable NPC Grenade Drops", "DisableNPCGrenadeDrop" )
+	panel:Help( "Prevent Combine Soldiers from dropping grenades on death" )
 
 	local AR2Orb = panel:ComboBox("AR2 Orb Drop", "RestoreArAltDropBehavior")
 	AR2Orb:SetSortItems(false)
