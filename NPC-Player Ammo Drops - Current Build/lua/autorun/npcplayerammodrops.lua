@@ -89,7 +89,7 @@ end
 
 if npc:IsNextBot() then return end // NextBots have dodgy GetActiveWeapon behaviour, so we ignore them completely.
 
-if npc:GetActiveWeapon():IsWeapon() == false then return end // Does the NPC even have a weapon? DO NOT DELETE! Otherwise antlions and such will cause errors.
+if npc:GetClass() == "npc_antlion_grub" or npc:GetActiveWeapon():IsWeapon() == false then return end // Does the NPC even have a weapon? DO NOT DELETE! Otherwise antlions and such will cause errors.
 
 // Basic function to disable NPC weapon drops
 
